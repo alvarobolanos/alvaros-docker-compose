@@ -1,0 +1,104 @@
+version: "2"
+
+services:
+  
+  # Radarr
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+      #- UMASK_SET=022 #optional
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/radarr:/config
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/movies:/movies
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  # Sonarr
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=100
+       - TZ=America/New_York
+       #- UMASK_SET=022 #optional
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/sonarr:/config
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/tv:/tv
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    
+  # Bazaar
+  bazarr:
+    image: linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+      #- UMASK_SET=022 #optional
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/config:/config
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/movies:/movies
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/tv:/tv
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+      
+  # Lidarr
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+      #- UMASK_SET=022 #optional
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/config:/config
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/music:/music
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+    
+  # LazyLibrarian
+  lazylibrarian:
+    image: linuxserver/lazylibrarian
+    container_name: lazylibrarian
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+      #- DOCKER_MODS=linuxserver/calibre-web:calibre #optional
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/lazylibrarian:/config
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/books:/books
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
+    ports:
+      - 5299:5299
+    restart: unless-stopped
+      
+   # Mylar
+    mylar:
+      image: linuxserver/mylar
+      container_name: mylar
+      environment:
+        - PUID=1000
+        - PGID=100
+        - TZ=America/New_York
+      volumes:
+        - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/mylar:/config
+        - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/media/comics:/comics
+        - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
+      ports:
+        - 8090:8090
+      restart: unless-stopped

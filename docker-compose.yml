@@ -113,6 +113,6 @@ services:
     volumes:
       - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/heimdall:/config
     ports:
-      - 88:88
-      - 444:444
+      - 88:80
+      - 444:443
     restart: unless-stopped

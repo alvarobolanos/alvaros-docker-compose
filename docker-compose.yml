@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 services:
   
@@ -100,4 +100,19 @@ services:
       - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/downloads:/downloads
     ports:
       - 8090:8090
+    restart: unless-stopped
+
+  # Heimdall
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=America/New_York
+    volumes:
+      - /srv/dev-disk-by-id-ata-ST9320325AS_5VD4MSXY-part6/appdata/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
     restart: unless-stopped
